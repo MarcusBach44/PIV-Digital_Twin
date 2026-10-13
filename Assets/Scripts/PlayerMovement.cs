@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -16,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        bodyTransform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -33,14 +31,14 @@ public class PlayerMovement : MonoBehaviour
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(horizontal, 0f, vertical);
-            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection = this.transform.TransformDirection(moveDirection);
             moveDirection *= moveSpeed;
         }
         
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
         
-        playerHead.transform.position = this.gameObject.transform.position + new Vector3(0f, headHeight, 0f);
-        bodyTransform.eulerAngles = new Vector3(0f, playerHead.transform.rotation.eulerAngles.y, 0f);
+        playerHead.transform.position = this.transform.position + new Vector3(0f, headHeight, 0f);
+        this.transform.eulerAngles = new Vector3(0f, playerHead.transform.rotation.eulerAngles.y, 0f);
     }
 }

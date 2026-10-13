@@ -4,14 +4,10 @@ using UnityEngine;
 public class PlayerHead : MonoBehaviour
 {
     [SerializeField] private float sensitivity = 1f;
+    [SerializeField] private float minRotation = -180f;
+    [SerializeField] private float maxRotation = 180f;
 
     private float mouseX, mouseY;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -22,16 +18,21 @@ public class PlayerHead : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float turner = mouseX *sensitivity;
-        if (turner != 0)
-        {
-            transform.eulerAngles += new Vector3(0f, turner, 0f);
-        }
+        float yRotation = mouseX * sensitivity;
+        float xRotation = -mouseY * sensitivity;
         
-        float looker = -mouseY *sensitivity;
-        if (looker != 0)
+        if (yRotation != 0f || xRotation != 0f)
         {
-            transform.eulerAngles += new Vector3(looker, 0f, 0f);
+            transform.eulerAngles += new Vector3(xRotation, yRotation, 0f);
+            float rotationLock = transform.eulerAngles.x;
+            if (rotationLock > 180)
+            {
+                rotationLock -= 360;
+            }
+            rotationLock = Mathf.Clamp(rotationLock, minRotation, maxRotation);
+            transform.eulerAngles = new Vector3(rotationLock, 
+                transform.eulerAngles.y, 
+                transform.eulerAngles.z);
         }
     }
 }
