@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHead : MonoBehaviour
@@ -9,11 +10,35 @@ public class PlayerHead : MonoBehaviour
 
     private float mouseX, mouseY;
 
+    [SerializeField] private GameObject rifle;
+    [SerializeField] private float interactionRange = 5f;
+
     // Update is called once per frame
     void Update()
     {
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
+
+        Debug.DrawRay(transform.position, transform.forward * interactionRange, Color.red);
+        
+        if (Input.GetKey(KeyCode.E))
+        {
+            if (!rifle.activeSelf)
+            {
+                RaycastHit[] hits;
+                hits = Physics.RaycastAll(transform.position, transform.forward, interactionRange);
+            
+                foreach (RaycastHit hit in hits)
+                {
+                    if (hit.transform.gameObject.CompareTag("Gun"))
+                    {
+                        rifle.SetActive(true);
+                        hit.transform.gameObject.SetActive(false);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
