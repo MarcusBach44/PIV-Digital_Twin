@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHead : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class PlayerHead : MonoBehaviour
 
     [SerializeField] private GameObject rifle;
     [SerializeField] private float interactionRange = 5f;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     // Update is called once per frame
     void Update()

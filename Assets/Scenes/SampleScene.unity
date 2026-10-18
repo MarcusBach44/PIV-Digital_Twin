@@ -29837,7 +29837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea4e45fd913828a4eabb5917b494a153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHead
-  sensitivity: 2
+  sensitivity: 4
   minRotation: -70
   maxRotation: 70
   rifle: {fileID: 1961593101}
