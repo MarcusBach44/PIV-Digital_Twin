@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - Gun
+  - Dragable
   layers:
   - Default
   - TransparentFX
