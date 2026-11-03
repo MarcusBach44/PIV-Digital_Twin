@@ -16,14 +16,11 @@ public class PlayerHead : MonoBehaviour
     [SerializeField] private GameObject rifle;
     [SerializeField] private float interactionRange = 5f;
     [SerializeField] private TMP_Text pickupText;
-    //private TextMeshPro pickupText;
-    
     
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        //pickupText = pickupUI.GetComponent<TextMeshPro>();
     }
 
     // Update is called once per frame
@@ -35,10 +32,12 @@ public class PlayerHead : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * interactionRange, Color.red);
 
         RaycastHit[] hits;
+        
         hits = Physics.RaycastAll(transform.position, transform.forward, interactionRange);
         pickupText.text = "";
         foreach (RaycastHit hit in hits)
         {
+            //Debug.Log(hit.transform.gameObject.tag);
             if (hit.transform.gameObject.CompareTag("Gun"))
             {
                 pickupText.text = "Press 'e' to pick up";
@@ -56,6 +55,21 @@ public class PlayerHead : MonoBehaviour
                 {
                     hit.transform.position = transform.position + transform.forward * 1f;
                     break;
+                }
+            }
+            else if (hit.transform.gameObject.CompareTag("Door"))
+            {
+                if (Input.GetKeyUp(KeyCode.E))
+                {
+                    DoorScript door =  hit.transform.gameObject.GetComponent<DoorScript>();
+                    if (!door.isOpen)
+                    {
+                        door.OpenDoor();
+                    }
+                    else
+                    {
+                        door.CloseDoor();
+                    }
                 }
             }
             
