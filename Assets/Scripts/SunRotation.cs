@@ -37,8 +37,8 @@ public class SunRotation : MonoBehaviour
         if (transform.position.y < 0)
         {
             isDay = false;
-            bloom.intensity.value = 0f;
-            mat.DisableKeyword("_EMISSION");
+            //bloom.intensity.value = 0f;
+            //mat.DisableKeyword("_EMISSION");
             LightSource.SetActive(false);
         }
         else
