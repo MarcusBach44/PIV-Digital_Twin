@@ -13,11 +13,19 @@ public class RifleScript : MonoBehaviour
     
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private float bulletLifeTime = 3f;
+    
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
         if (Input.GetButton("Fire1") && cooldown <= 0)
         {
+            animator.SetBool("IsShooting", true);
             cooldown = rateOfFire;
             GameObject bullet = Instantiate(bulletPrefab, bulletPoint.transform.position, transform.rotation);
             
@@ -26,6 +34,10 @@ public class RifleScript : MonoBehaviour
             bs.lifeTime = bulletLifeTime;
         }
         cooldown -= Time.deltaTime;
+        if (Input.GetButtonUp("Fire1"))
+        {
+            animator.SetBool("IsShooting",  false);
+        }
     }
 
     

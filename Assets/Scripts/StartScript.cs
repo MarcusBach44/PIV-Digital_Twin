@@ -6,22 +6,20 @@ public class StartScript : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject camera;
     [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject crosshair;
     private bool isStarted = false;
     private float counter = 3;
     private GameObject cameraPoint;
-
-    public void onStart()
+	public void onStart()
     {
         cameraPoint = player.transform.GetChild(0).gameObject;
         isStarted = true;
         player.GetComponent<PlayerHead>().enabled = true;
     }
-    
     private void Update()
     {
         if (isStarted)
         {
-             
             camera.transform.position =
                 Vector3.Lerp(camera.transform.position, cameraPoint.transform.position, 3 * Time.deltaTime);
             camera.transform.rotation = 
@@ -32,6 +30,7 @@ public class StartScript : MonoBehaviour
             {
                 isStarted = false;
                 canvas.SetActive(false);
+                crosshair.SetActive(true);
             }
         }
         
