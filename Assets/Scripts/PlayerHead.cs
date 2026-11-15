@@ -37,11 +37,16 @@ public class PlayerHead : MonoBehaviour
         pickupText.text = "";
         foreach (RaycastHit hit in hits)
         {
+            /*
             //Debug.Log(hit.transform.gameObject.tag);
+            if (hit.transform.gameObject.tag != "Untagged")
+            {
+                Debug.Log(hit.transform.gameObject.tag);
+            }*/
             if (hit.transform.gameObject.CompareTag("Gun"))
             {
                 pickupText.text = "Press 'e' to pick up";
-                if (Input.GetKey(KeyCode.E))
+                if (Input.GetKeyUp(KeyCode.E))
                 {
                     rifle.SetActive(true);
                     hit.transform.gameObject.SetActive(false);
@@ -61,15 +66,22 @@ public class PlayerHead : MonoBehaviour
             {
                 if (Input.GetKeyUp(KeyCode.E))
                 {
-                    DoorScript door =  hit.transform.gameObject.GetComponent<DoorScript>();
-                    if (!door.isOpen)
+                    DoorButton doorBtn =  hit.transform.gameObject.GetComponent<DoorButton>();
+                    if (!doorBtn.isOpen)
                     {
-                        door.OpenDoor();
+                        doorBtn.OpenDoor();
                     }
                     else
                     {
-                        door.CloseDoor();
+                        doorBtn.CloseDoor();
                     }
+                }
+            }
+            else if (hit.transform.gameObject.CompareTag("PowerCenterScreen"))
+            {
+                if (Input.GetKeyUp(KeyCode.E))
+                {
+                    hit.transform.gameObject.GetComponent<PowerCubeComputer>().Interact();
                 }
             }
             

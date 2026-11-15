@@ -8,6 +8,7 @@ TagManager:
   - Gun
   - Dragable
   - Door
+  - PowerCenterScreen
   layers:
   - Default
   - TransparentFX

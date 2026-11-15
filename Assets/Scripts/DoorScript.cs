@@ -8,7 +8,12 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private TMP_Text popUpText;
     [SerializeField] private GameObject doorPoint;
     public bool isOpen = false;
+    private Animator animator;
 
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void OpenDoor()
     {
@@ -18,8 +23,7 @@ public class DoorScript : MonoBehaviour
         }
         
         isOpen = true;
-        //gameObject.SetActive(false);
-        gameObject.transform.RotateAround(doorPoint.transform.position, Vector3.up, 90);
+        animator.SetBool("IsOpen", true);
     }
 
     public void CloseDoor()
@@ -30,21 +34,17 @@ public class DoorScript : MonoBehaviour
         }
         
         isOpen = false;
-        //gameObject.SetActive(true);
-        gameObject.transform.RotateAround(doorPoint.transform.position, Vector3.up, -90);
+        animator.SetBool("IsOpen", false);
     }
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !isOpen)
         {
-            popUpText.gameObject.SetActive(true);
-            if (generator.GetComponent<GeneratorScript>().isPowerOn)
+            
+            if (!generator.GetComponent<GeneratorScript>().isPowerOn)
             {
-                popUpText.text = "Press 'e' to open";
-            }
-            else
-            {
+                popUpText.gameObject.SetActive(true);
                 popUpText.text = "Needs Power";
             }
             
