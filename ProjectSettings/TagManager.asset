@@ -9,6 +9,10 @@ TagManager:
   - Dragable
   - Door
   - PowerCenterScreen
+  - KeyCard
+  - KeycardScreen
+  - SatelliteButton
+  - LinkButton
   layers:
   - Default
   - TransparentFX
