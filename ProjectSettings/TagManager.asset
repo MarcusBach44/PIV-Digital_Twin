@@ -13,6 +13,7 @@ TagManager:
   - KeycardScreen
   - SatelliteButton
   - LinkButton
+  - Rocket
   layers:
   - Default
   - TransparentFX

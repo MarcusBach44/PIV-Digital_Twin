@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ public class CommunicationComputer : MonoBehaviour
 {
     [SerializeField] private GameObject satelliteScreen0, satelliteScreen1, button;
     private Renderer rend_satelliteScreen0, rend_satelliteScreen1;
+
+    [SerializeField] private GameObject rocket;
     
     [SerializeField] private TMP_Text screenText;
     
@@ -40,7 +43,21 @@ public class CommunicationComputer : MonoBehaviour
 
     public void EstablishLink()
     {
-        
+        StartCoroutine(Cutscene());
     }
-    
+
+
+    IEnumerator Cutscene()
+    {
+        screenText.text = "Establishing Link";
+        
+        for (int i = 0; i < 3; i++)
+        {
+            yield return new WaitForSeconds(1);
+            screenText.text += ".";
+        }
+        yield return new WaitForSeconds(1);
+        screenText.text = "Link Established \n Help Inbound";
+        rocket.SetActive(true);
+    }
 }

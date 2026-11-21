@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerHead : MonoBehaviour
@@ -135,6 +136,15 @@ public class PlayerHead : MonoBehaviour
                 if (Input.GetKeyUp(KeyCode.E))
                 {
                     hit.transform.gameObject.GetComponent<CommunicationButtonScript>().Interact();
+                }
+            }
+            
+            else if (hit.transform.gameObject.CompareTag("Rocket"))
+            {
+                pickupText.text = "Press 'e' Take Off";
+                if (Input.GetKeyUp(KeyCode.E))
+                {
+                    SceneManager.LoadScene(0);
                 }
             }
             
