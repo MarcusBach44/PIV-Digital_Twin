@@ -35,8 +35,8 @@ public class PlayerHead : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward*interactionRange, Color.red);
 
         RaycastHit[] hits;
-        
-        hits = Physics.RaycastAll(transform.position, transform.forward*interactionRange, interactionRange);
+        hits = Physics.RaycastAll(transform.position, 
+            transform.forward*interactionRange, interactionRange);
         pickupText.text = "";
         foreach (RaycastHit hit in hits)
         {
@@ -147,7 +147,6 @@ public class PlayerHead : MonoBehaviour
                     SceneManager.LoadScene(0);
                 }
             }
-            
         }
     }
 
