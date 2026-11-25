@@ -39,9 +39,9 @@ public class PlayerHead : MonoBehaviour
             transform.forward*interactionRange, interactionRange);
         pickupText.text = "";
         foreach (RaycastHit hit in hits)
-        {
+        {Debug.Log(hit.transform.gameObject.tag);
             /*
-            //Debug.Log(hit.transform.gameObject.tag);
+            
             if (hit.transform.gameObject.tag != "Untagged")
             {
                 Debug.Log(hit.transform.gameObject.tag);

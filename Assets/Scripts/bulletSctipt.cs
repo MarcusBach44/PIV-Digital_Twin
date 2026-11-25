@@ -10,8 +10,8 @@ public class bulletSctipt : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //GetComponent<Rigidbody>().linearVelocity = transform.forward * bulletSpeed;
-        GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed* 50 * Time.deltaTime,  ForceMode.VelocityChange);
+        GetComponent<Rigidbody>().AddForce(transform.forward * bulletSpeed* 50 * Time.deltaTime,  
+            ForceMode.VelocityChange);
         StartCoroutine(DestroyBullet(gameObject));
     }
 
@@ -19,10 +19,5 @@ public class bulletSctipt : MonoBehaviour
     {
         yield return new WaitForSeconds(lifeTime);
         Destroy(bullet);
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        //  Destroy(gameObject);
     }
 }

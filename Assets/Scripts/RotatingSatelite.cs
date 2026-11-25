@@ -18,7 +18,10 @@ public class RotatingSatelite : MonoBehaviour
         if (isRotating)
         {
             animator.enabled = false;
-            transform.Rotate(new Vector3(0, rotationSpeed*Time.deltaTime, 0), Space.Self);
+            transform.Rotate(new Vector3(
+                0, 
+                rotationSpeed*Time.deltaTime, 
+                0), Space.Self);
         }
     }
 
